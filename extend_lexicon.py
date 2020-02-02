@@ -50,11 +50,11 @@ if __name__ == '__main__':
     wordD = scale(list(lexicon['D']))
     lexicon = dict([word, VAD(wordV[idx][0], wordA[idx][0], wordD[idx][0])] for idx, word in enumerate(words))
 
-    # turn the lexicon from VAD to emotions
-    print("Turning them into emotions...")
-    for word, vad in lexicon.items():
-        emo = vad.closest(emotions.Final)
-        lexicon[word] = emo
+    # # turn the lexicon from VAD to emotions
+    # print("Turning them into emotions...")
+    # for word, vad in lexicon.items():
+    #     emo = vad.closest(emotions.Final)
+    #     lexicon[word] = emo
 
     # Add synonyms
     print("Adding synonyms...")
@@ -116,6 +116,7 @@ if __name__ == '__main__':
 
     print("Checking for spelling corrections")
     for word in tqdm(need_tags.keys()):
+        print(word)
         new_words = 0
         remaining_words = []
         spelling = spell.unknown([word])
