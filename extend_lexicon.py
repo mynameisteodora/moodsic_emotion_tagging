@@ -116,7 +116,6 @@ if __name__ == '__main__':
 
     print("Checking for spelling corrections")
     for word in tqdm(need_tags.keys()):
-        print(word)
         new_words = 0
         remaining_words = []
         spelling = spell.unknown([word])
