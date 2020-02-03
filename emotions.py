@@ -7,34 +7,37 @@ class VAD:
         self.v = v
         self.a = a
         self.d = d
-       
+
     def __add__(self, other):
         return VAD(self.v + other.v, self.a + other.a, self.d + other.d)
-    
+
     def __radd__(self, other):
         return VAD(self.v + other, self.a + other, self.d + other)
-    
+
     def __sub__(self, other):
         return VAD(self.v - other.v, self.a - other.a, self.d - other.d)
-    
+
     def __rsub__(self, other):
         return VAD(self.v - other, self.a - other, self.d - other)
-    
+
     def __div__(self, b):
         return self.__truediv__(b)
-    
+
     def __truediv__(self, b):
         return VAD(self.v / b, self.a / b, self.d / b)
-    
+
     def __mul__(self, scaling):
         return VAD(self.v * scaling, self.a * scaling, self.d * scaling)
-    
+
+    def __rmul__(self, scaling):
+        return VAD(self.v * scaling, self.a * scaling, self.d * scaling)
+
     def __str__(self):
         return "V: {0}, A: {1}, D: {2}".format(self.v, self.a, self.d)
-    
+
     def __repr__(self):
         return self.__str__()
-    
+
     def dist(self, other):
         return np.linalg.norm(
             np.array([self.v, self.a, self.d]) - np.array([other.v, other.a, other.d])
@@ -44,9 +47,9 @@ class VAD:
         keys = list(emotionSet.keys())
         values = list(emotionSet.values())
         distances = [self.dist(emot) for emot in values]
-        
+
         return keys[np.argmin(distances)]
-    
+
     def topKClosest(self, emotionSet, k=5):
         keys = list(emotionSet.keys())
         values = list(emotionSet.values())
@@ -54,7 +57,7 @@ class VAD:
         distsZip = list(zip(keys, dists))
         distsZipSorted = sorted(distsZip, key=lambda x: x[1])
         return distsZipSorted[:k]
-        
+
 Ekman = {
     'SADNESS': VAD(-0.63, -0.27, -0.33),
     'FEAR': VAD(-0.64, 0.60, -0.43),

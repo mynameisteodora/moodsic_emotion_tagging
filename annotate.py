@@ -77,8 +77,8 @@ def predict(text):
                 vads.append(w*2*new_lexicon[word])
             else:
                 vads.append(w*new_lexicon[word])
-    #     vads = [weights[new_lexicon[word].closest(Final)] * new_lexicon[word] for (word, pos) in text
-    #             if word in new_lexicon and pos in important_tags]
+    # vads = [weights[new_lexicon[word].closest(Final)] * new_lexicon[word] for (word, pos) in text
+    #         if word in new_lexicon and pos in important_tags]
     if len(vads) == 0:
     #         print("Unidentifiable text = {}".format(text))
         return 'None'
