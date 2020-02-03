@@ -100,7 +100,8 @@ if __name__ == '__main__':
 
     print("Weights new lexicon = {}".format(weights))
 
-    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', nrows=395888)
+    colnames = ['UID', 'Artist', 'Song', 'Lyrics']
+    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', skiprows=395888, names=colnames, header=None)
 
     tagged_emos = open('./MOODSIC_LYRICS_EMOTIONS.csv', 'w')
     tagged_emos.write("UID, Relaxed, Solemn, Joyful, Startled, Upset, Sad\n")
