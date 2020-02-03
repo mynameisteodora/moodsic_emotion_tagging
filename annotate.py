@@ -123,5 +123,7 @@ if __name__ == '__main__':
 
         tagged_emos.write("{0}, {1}, {2}, {3}, {4}, {5}, {6}\n".format(lyrics.loc[idx]['UID'], emotions[idx][0], emotions[idx][1],
                                                                       emotions[idx][2], emotions[idx][3],
+                                                                      emotions[idx][4], emotions[idx][5]))
+
 
     tagged_emos.close()
