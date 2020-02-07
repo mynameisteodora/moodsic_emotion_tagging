@@ -117,6 +117,11 @@ if __name__ == '__main__':
 
         # sum all emotions in counter
         total = sum([v for v in c.values()])
+        print("wrong total = {}".format(total))
+
+        total = sum([v for v in emos.values()])
+        print("total = {}".format(total))
+
 
         for k,v in emos_to_idx.items():
             emotions[idx][v] = emos[k]/total
@@ -125,6 +130,8 @@ if __name__ == '__main__':
         tagged_emos.write("{0}, {1}, {2}, {3}, {4}, {5}, {6}\n".format(lyrics.loc[idx]['UID'], emotions[idx][0], emotions[idx][1],
                                                                       emotions[idx][2], emotions[idx][3],
                                                                       emotions[idx][4], emotions[idx][5]))
+        if idx == 20:
+            break
 
 
     tagged_emos.close()
