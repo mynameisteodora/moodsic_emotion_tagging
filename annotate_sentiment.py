@@ -135,7 +135,7 @@ if __name__ == '__main__':
         header=0
     else:
         header=None
-    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', skiprows=beg, nrows=50, names=colnames, header=header)
+    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', skiprows=beg, nrows=49486, names=colnames, header=header)
 
     emo_file_name = './MOODSIC_LYRICS_EMOTIONS_SENTIMENT_{}.csv'.format(num)
 
