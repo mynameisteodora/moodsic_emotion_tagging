@@ -125,10 +125,21 @@ def predict_emotion(stanza):
     return dp_emotion
 
 if __name__ == '__main__':
-    colnames = ['UID', 'Artist', 'Song', 'Lyrics']
-    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', nrows=395888, names=colnames, header=1)
+    beg = input("Start from row:")
+    beg = int(beg)
+    num = input("Slice number:")
+    num = int(num)
 
-    tagged_emos = open('./MOODSIC_LYRICS_EMOTIONS_SENTIMENT_1.csv', 'w')
+    colnames = ['UID', 'Artist', 'Song', 'Lyrics']
+    if beg == 0:
+        header=0
+    else:
+        header=None
+    lyrics = pd.read_csv('MOODSIC_LYRICS_DATASET_SORTED.csv', skiprows=beg, nrows=50, names=colnames, header=header)
+
+    emo_file_name = './MOODSIC_LYRICS_EMOTIONS_SENTIMENT_{}.csv'.format(num)
+
+    tagged_emos = open(emo_file_name, 'w')
     tagged_emos.write("UID, Relaxed, Solemn, Joyful, Startled, Upset, Sad\n")
     emotions = np.zeros((len(lyrics), 6))
     for idx, song in tqdm(enumerate(lyrics['Lyrics'])):
@@ -145,6 +156,6 @@ if __name__ == '__main__':
             emotions[idx][v] = emos[k]/total
 
 
-        tagged_emos.write("{0}, {1}, {2}, {3}, {4}, {5}, {6}\n".format(lyrics.loc[idx]['UID'], emotions[idx][0], emotions[idx][1],
+        tagged_emos.write("{0}, {1:0.3f}, {2:0.3f}, {3:0.3f}, {4:0.3f}, {5:0.3f}, {6:0.3f}\n".format(lyrics.loc[idx]['UID'], emotions[idx][0], emotions[idx][1],
                                                                           emotions[idx][2], emotions[idx][3],
                                                                           emotions[idx][4], emotions[idx][5]))
